@@ -62,15 +62,25 @@ function MemberDashboard({ userId }: { userId: string }) {
         </Link>
       </article>
 
-        <article className="rounded-2xl border border-slate-800 bg-slate-900 p-6">
-          <h2 className="text-2xl font-semibold text-white">{language === 'ne' ? 'समुदाय सन्देश' : 'Community Messages'}</h2>
-          <p className="mt-2 text-slate-300">
-            {language === 'ne' ? 'सम्पूर्ण समुदायलाई सूचना पठाउनुहोस्।' : 'Send updates to all members and admins.'}
-          </p>
-          <Link href="/community" className="mt-4 inline-block rounded-full border border-slate-700 px-4 py-2 text-sm text-white">
-            {language === 'ne' ? 'सन्देश पठाउनुहोस्' : 'Send Message'}
-          </Link>
-        </article>
+      <article className="rounded-2xl border border-slate-800 bg-slate-900 p-6">
+        <h2 className="text-2xl font-semibold text-white">{language === 'ne' ? 'समुदाय च्याट' : 'Community Chat'}</h2>
+        <p className="mt-2 text-slate-300">
+          {language === 'ne' ? 'समुदायसँग कुरा गर्नुहोस्।' : 'Chat with the community.'}
+        </p>
+        <Link href="/community" className="mt-4 inline-block rounded-full border border-slate-700 px-4 py-2 text-sm text-white">
+          {language === 'ne' ? 'च्याट खोल्नुहोस्' : 'Open Chat'}
+        </Link>
+      </article>
+
+      <article className="rounded-2xl border border-slate-800 bg-slate-900 p-6">
+        <h2 className="text-2xl font-semibold text-white">{language === 'ne' ? 'सूचना' : 'Announcements'}</h2>
+        <p className="mt-2 text-slate-300">
+          {language === 'ne' ? 'समूहका आधिकारिक सूचनाहरू हेर्नुहोस्।' : 'View official announcements.'}
+        </p>
+        <Link href="/announcements" className="mt-4 inline-block rounded-full border border-slate-700 px-4 py-2 text-sm text-white">
+          {language === 'ne' ? 'सूचना हेर्नुहोस्' : 'View Announcements'}
+        </Link>
+      </article>
 
       <article className="rounded-2xl border border-slate-800 bg-slate-900 p-6">
         <h2 className="text-2xl font-semibold text-white">{language === 'ne' ? 'समूह जानकारी' : 'Group Info'}</h2>
@@ -112,6 +122,26 @@ function AdminDashboard() {
         </p>
         <Link href="/admin/members" className="mt-4 inline-block rounded-full border border-slate-700 px-4 py-2 text-sm text-white">
           {language === 'ne' ? 'सदस्यहरू' : 'Manage Members'}
+        </Link>
+      </article>
+
+      <article className="rounded-2xl border border-slate-800 bg-slate-900 p-6">
+        <h2 className="text-2xl font-semibold text-white">{language === 'ne' ? 'समुदाय च्याट' : 'Community Chat'}</h2>
+        <p className="mt-2 text-slate-300">
+          {language === 'ne' ? 'समुदायसँग कुरा गर्नुहोस्।' : 'Chat with the community.'}
+        </p>
+        <Link href="/community" className="mt-4 inline-block rounded-full border border-slate-700 px-4 py-2 text-sm text-white">
+          {language === 'ne' ? 'च्याट खोल्नुहोस्' : 'Open Chat'}
+        </Link>
+      </article>
+
+      <article className="rounded-2xl border border-slate-800 bg-slate-900 p-6">
+        <h2 className="text-2xl font-semibold text-white">{language === 'ne' ? 'सूचना' : 'Announcements'}</h2>
+        <p className="mt-2 text-slate-300">
+          {language === 'ne' ? 'आधिकारिक सूचना पोस्ट वा हेर्नुहोस्।' : 'Post or view official announcements.'}
+        </p>
+        <Link href="/announcements" className="mt-4 inline-block rounded-full border border-slate-700 px-4 py-2 text-sm text-white">
+          {language === 'ne' ? 'सूचना' : 'Announcements'}
         </Link>
       </article>
 
