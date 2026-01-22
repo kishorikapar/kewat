@@ -1,0 +1,48 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isMember(groupId) {
+      return exists(/databases/$(database)/documents/memberships/$(request.auth.uid)_$(groupId));
+    }
+
+    function membershipRole(groupId) {
+      let doc = get(/databases/$(database)/documents/memberships/$(request.auth.uid)_$(groupId));
+      return doc.exists ? doc.data.role : null;
+    }
+
+    match /groups/{groupId} {
+      allow read: if request.auth != null && isMember(groupId);
+      allow write: if request.auth != null && membershipRole(groupId) in ['admin', 'dev'];
+    }
+
+    match /memberships/{membershipId} {
+      allow read: if request.auth != null && exists(/databases/$(database)/documents/memberships/$(request.auth.uid)_${get(/databases/$(database)/documents/memberships/$(membershipId)).data.groupId});
+      allow write: if request.auth != null && membershipRole(get(/databases/$(database)/documents/memberships/$(membershipId)).data.groupId) == 'dev';
+    }
+
+    match /transactions/{transactionId} {
+      allow read, create: if request.auth != null && membershipRole(resource.data.groupId) != null;
+      allow update, delete: if request.auth != null && membershipRole(resource.data.groupId) in ['admin', 'dev'];
+    }
+
+    match /proofs/{proofId} {
+      allow read: if request.auth != null && membershipRole(resource.data.groupId) != null;
+      allow create, update: if request.auth != null && membershipRole(resource.data.groupId) in ['admin', 'dev'];
+    }
+
+    match /auditLogs/{logId} {
+      allow read: if request.auth != null && membershipRole(resource.data.groupId) != null;
+      allow write: if request.auth != null && request.auth.token.role == 'dev';
+    }
+
+    match /notifications/{notificationId} {
+      allow read: if request.auth != null && membershipRole(resource.data.groupId) != null;
+      allow write: if request.auth != null && request.auth.token.role in ['admin', 'dev'];
+    }
+
+    match /compoundInterestSettings/{settingsId} {
+      allow read: if request.auth != null && membershipRole(resource.data.groupId) != null;
+      allow write: if request.auth != null && membershipRole(resource.data.groupId) in ['admin', 'dev'];
+    }
+  }
+}
